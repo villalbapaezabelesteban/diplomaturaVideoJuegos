@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class ControladorCamara : MonoBehaviour
 {
+    public float delay = 0.1f;
+
     private GameObject playerAbel;
     private Vector3 desplazamiento;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerAbel = GameObject.FindWithTag("PlayerAbel");
+        desplazamiento = transform.position - playerAbel.transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        Vector3 posicionActual = transform.position;
+        Vector3 posicionFinal = desplazamiento + playerAbel.transform.position;
+
+        transform.position = Vector3.Lerp(posicionActual, posicionFinal, delay * Time.deltaTime);
     }
 }

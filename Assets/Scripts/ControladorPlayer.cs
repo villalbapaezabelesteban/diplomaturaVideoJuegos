@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class ControladorPlayer : MonoBehaviour
 {
-    float movimientoNeutro = 0.0f;
-
-    public float movimientoHorizontal = 0.1f;
-    public float movimientoVertical = 0.1f;
-
     public float fuerzaMovimiento = 1.0f;
 
     Rigidbody rigidbody;
@@ -16,7 +11,6 @@ public class ControladorPlayer : MonoBehaviour
     void Start()
     {
         rigidbody = gameObject.GetComponent<Rigidbody>();
-
     }
 
     void Update()

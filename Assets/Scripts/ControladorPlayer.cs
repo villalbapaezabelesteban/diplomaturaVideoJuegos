@@ -6,7 +6,11 @@ public class ControladorPlayer : MonoBehaviour
 {
     public float fuerzaMovimiento = 1.0f;
 
-    Rigidbody rigidbody;
+    private Rigidbody rigidbody;
+    private bool izquierda;
+    private bool derecha;
+    private bool arriba;
+    private bool abajo;
 
     void Start()
     {
@@ -15,13 +19,16 @@ public class ControladorPlayer : MonoBehaviour
 
     void Update()
     {
+        izquierda = Input.GetKey("left");
+        derecha = Input.GetKey("right");
+        arriba = Input.GetKey("up");
+        abajo = Input.GetKey("down");
+    }
+
+    void FixedUpdate()
+    {
         if (rigidbody != null)
         {
-            bool izquierda = Input.GetKey("left");
-            bool derecha = Input.GetKey("right");
-            bool arriba = Input.GetKey("up");
-            bool abajo = Input.GetKey("down");
-
             if (arriba)
             {
                 rigidbody.AddForce(Vector3.forward * fuerzaMovimiento);

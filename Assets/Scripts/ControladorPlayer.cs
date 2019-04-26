@@ -6,11 +6,20 @@ public class ControladorPlayer : MonoBehaviour
 {
     public float fuerzaMovimiento = 1.0f;
 
+    public string izquierdaInputKey = "left";
+    public string derechaInputKey = "right";
+    public string arribaInputKey = "up";
+    public string abajoInputKey = "down";
+
+    public bool player2 = false;
+
     private Rigidbody rigidbody;
+
     private bool izquierda;
     private bool derecha;
     private bool arriba;
     private bool abajo;
+    private int points = 0;
 
     void Start()
     {
@@ -19,10 +28,10 @@ public class ControladorPlayer : MonoBehaviour
 
     void Update()
     {
-        izquierda = Input.GetKey("left");
-        derecha = Input.GetKey("right");
-        arriba = Input.GetKey("up");
-        abajo = Input.GetKey("down");
+        izquierda = Input.GetKey(izquierdaInputKey);
+        derecha = Input.GetKey(derechaInputKey);
+        arriba = Input.GetKey(arribaInputKey);
+        abajo = Input.GetKey(abajoInputKey);
     }
 
     void FixedUpdate()
@@ -48,6 +57,30 @@ public class ControladorPlayer : MonoBehaviour
             {
                 rigidbody.AddForce(Vector3.right * fuerzaMovimiento);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Item"))
+        {
+            GameObject.Destroy(other.gameObject);
+            points += 1;
+        }
+    }
+
+    private void OnGUI()
+    {
+        GUIStyle style = new GUIStyle();
+        style.richText = true;
+
+        GUI.Box(new Rect(10, 10, 180, 160), "Jugando...");
+        if (player2)
+        {
+            GUI.Label(new Rect(30, 100, 80, 50), "<color=aqua>Player 2 Puntos: <b><size=30>" + points + "</size></b></color>", style);
+        } else
+        {
+            GUI.Label(new Rect(30, 40, 80, 50), "<color=aqua>Player 1 Puntos: <b><size=30>" + points + "</size></b></color>", style);
         }
     }
 }

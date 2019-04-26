@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerAbel
+  - Item
+  - PlayerAbel2
   layers:
   - Default
   - TransparentFX
